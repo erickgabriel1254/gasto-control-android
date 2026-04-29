@@ -14,5 +14,4 @@ Aplicación móvil desarrollada en Kotlin con Jetpack Compose para registrar y c
 - Cálculo de total
 
 ## Autor
-Erick Gabriel
-Ismael Davila
+Erick Valdivieso / Ismael Davila
