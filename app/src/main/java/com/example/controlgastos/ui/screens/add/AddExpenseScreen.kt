@@ -19,6 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.controlgastos.ui.components.PrimaryButton
+import androidx.compose.ui.res.stringResource
+import com.example.controlgastos.R
 
 /**
  * Pantalla para registrar un nuevo gasto.
@@ -38,7 +40,7 @@ fun AddExpenseScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Nuevo gasto") }
+                title = { Text(stringResource(R.string.new_expense)) }
             )
         }
     ) { padding ->
@@ -53,7 +55,7 @@ fun AddExpenseScreen(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("Título") },
+                label = { Text(stringResource(R.string.title_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -62,7 +64,7 @@ fun AddExpenseScreen(
             OutlinedTextField(
                 value = amount,
                 onValueChange = { amount = it },
-                label = { Text("Monto") },
+                label = { Text(stringResource(R.string.amount_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -71,7 +73,7 @@ fun AddExpenseScreen(
             OutlinedTextField(
                 value = category,
                 onValueChange = { category = it },
-                label = { Text("Categoría") },
+                label = { Text(stringResource(R.string.category_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -80,7 +82,7 @@ fun AddExpenseScreen(
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("Descripción") },
+                label = { Text(stringResource(R.string.description_label)) },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 3
             )
@@ -88,7 +90,7 @@ fun AddExpenseScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             PrimaryButton(
-                text = "Guardar gasto",
+                text = stringResource(R.string.save_expense),
                 onClick = {
                     viewModel.saveExpense(
                         title = title,

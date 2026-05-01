@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ControlGastos</string>
+    <string name="home_title">Resumen de gastos</string>
+    <string name="total_spent">Total gastado</string>
+    <string name="new_expense">Nuevo gasto</string>
+    <string name="save_expense">Guardar gasto</string>
+    <string name="expense_detail">Detalle del gasto</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="delete_expense">Eliminar gasto</string>
+    <string name="title_label">Título</string>
+    <string name="amount_label">Monto</string>
+    <string name="category_label">Categoría</string>
+    <string name="description_label">Descripción</string>
 </resources>

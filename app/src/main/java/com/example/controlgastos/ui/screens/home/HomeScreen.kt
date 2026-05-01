@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.controlgastos.ui.components.ExpenseCard
 import com.example.controlgastos.ui.components.SummaryCard
+import androidx.compose.ui.res.stringResource
+import com.example.controlgastos.R
 
 /**
  * Pantalla principal de la aplicación.
@@ -29,7 +31,7 @@ fun HomeScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = onAddClick) {
-                Text("+")
+                Text(stringResource(R.string.new_expense))
             }
         }
     ) { padding ->

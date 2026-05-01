@@ -24,6 +24,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.controlgastos.ui.components.PrimaryButton
+import androidx.compose.ui.res.stringResource
+import com.example.controlgastos.R
 
 /**
  * Pantalla de detalle del gasto.
@@ -54,7 +56,7 @@ fun ExpenseDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detalle del gasto") }
+                title = { Text(stringResource(R.string.expense_detail))}
             )
         }
     ) { padding ->
@@ -79,7 +81,7 @@ fun ExpenseDetailScreen(
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    label = { Text("Título") },
+                    label = { Text(stringResource(R.string.title_label)) },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -88,7 +90,7 @@ fun ExpenseDetailScreen(
                 OutlinedTextField(
                     value = amount,
                     onValueChange = { amount = it },
-                    label = { Text("Monto") },
+                    label = { Text(stringResource(R.string.amount_label)) },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -97,7 +99,7 @@ fun ExpenseDetailScreen(
                 OutlinedTextField(
                     value = category,
                     onValueChange = { category = it },
-                    label = { Text("Categoría") },
+                    label = { Text(stringResource(R.string.category_label)) },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -106,7 +108,7 @@ fun ExpenseDetailScreen(
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text("Descripción") },
+                    label = { Text(stringResource(R.string.category_label)) },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 3
                 )
@@ -114,7 +116,7 @@ fun ExpenseDetailScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 PrimaryButton(
-                    text = "Guardar cambios",
+                    text = stringResource(R.string.save_changes),
                     onClick = {
                         viewModel.updateExpense(
                             currentExpense = currentExpense,
@@ -141,7 +143,7 @@ fun ExpenseDetailScreen(
                         contentColor = MaterialTheme.colorScheme.error
                     )
                 ) {
-                    Text("Eliminar gasto")
+                    Text(stringResource(R.string.delete_expense))
                 }
             }
         }
