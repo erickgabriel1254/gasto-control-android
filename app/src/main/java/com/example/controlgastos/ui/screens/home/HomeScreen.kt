@@ -13,6 +13,8 @@ import com.example.controlgastos.ui.components.ExpenseCard
 import com.example.controlgastos.ui.components.SummaryCard
 import androidx.compose.ui.res.stringResource
 import com.example.controlgastos.R
+import com.example.controlgastos.ui.utils.formatCurrency
+import androidx.compose.foundation.layout.Arrangement
 
 /**
  * Pantalla principal de la aplicación.
@@ -44,20 +46,18 @@ fun HomeScreen(
 
             SummaryCard(
                 title = "Total Gastado",
-                value = "$$total"
+                value = formatCurrency(total)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            LazyColumn {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)){
                 items(expenses) { expense ->
 
                     ExpenseCard(
                         expense = expense,
                         onClick = { onItemClick(expense.id) }
                     )
-
-                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
         }

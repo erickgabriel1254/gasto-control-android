@@ -37,6 +37,11 @@ fun AddExpenseScreen(
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
+    val isFormValid = title.isNotBlank() &&
+            amount.toDoubleOrNull() != null &&
+            amount.toDoubleOrNull()!! > 0.0 &&
+            category.isNotBlank()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -91,13 +96,20 @@ fun AddExpenseScreen(
 
             PrimaryButton(
                 text = stringResource(R.string.save_expense),
+                enabled = isFormValid,
                 onClick = {
                     viewModel.saveExpense(
                         title = title,
                         amountText = amount,
                         category = category,
                         description = description,
-                        onSuccess = onExpenseSaved
+                        onSuccess = {
+                            title = ""
+                            amount = ""
+                            category = ""
+                            description = ""
+                            onExpenseSaved()
+                        }
                     )
                 }
             )

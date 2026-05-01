@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.controlgastos.data.local.ExpenseEntity
+import com.example.controlgastos.ui.utils.formatCurrency
 
 /**
  * Tarjeta reutilizable para representar un gasto dentro de una lista.
@@ -47,7 +48,7 @@ fun ExpenseCard(
             }
 
             Text(
-                text = "$${expense.amount}",
+                text = formatCurrency(expense.amount),
                 style = MaterialTheme.typography.titleMedium
             )
         }
