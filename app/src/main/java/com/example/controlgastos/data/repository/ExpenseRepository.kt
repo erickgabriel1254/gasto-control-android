@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Repositorio encargado de aislar la capa de datos del resto de la aplicación.
- * Expone las operaciones necesarias para consultar, insertar y eliminar gastos.
+ * Expone las operaciones necesarias para consultar, insertar, actualizar y eliminar gastos.
  */
 class ExpenseRepository(
     private val expenseDao: ExpenseDao
@@ -21,6 +21,10 @@ class ExpenseRepository(
 
     suspend fun insertExpense(expense: ExpenseEntity) {
         expenseDao.insertExpense(expense)
+    }
+
+    suspend fun updateExpense(expense: ExpenseEntity) {
+        expenseDao.updateExpense(expense)
     }
 
     suspend fun deleteExpense(expense: ExpenseEntity) {
