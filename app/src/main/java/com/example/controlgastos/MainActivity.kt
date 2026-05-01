@@ -3,45 +3,26 @@ package com.example.controlgastos
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.controlgastos.ui.theme.ControlGastosTheme
+import com.example.controlgastos.data.local.DatabaseProvider
+import com.example.controlgastos.data.repository.ExpenseRepository
+import com.example.controlgastos.ui.screens.home.HomeScreen
+import com.example.controlgastos.ui.screens.home.HomeViewModel
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        val database = DatabaseProvider.getDatabase(applicationContext)
+        val repository = ExpenseRepository(database.expenseDao())
+        val viewModel = HomeViewModel(repository)
+
         setContent {
-            ControlGastosTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            HomeScreen(
+                viewModel = viewModel,
+                onAddClick = {},
+                onItemClick = {}
+            )
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ControlGastosTheme {
-        Greeting("Android")
     }
 }
