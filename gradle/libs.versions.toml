@@ -9,6 +9,7 @@ activityCompose = "1.8.0"
 kotlin = "2.2.10"
 composeBom = "2026.02.01"
 
+#Configuracio del ambiente
 ksp = "2.2.10-2.0.2"
 room = "2.8.3"
 navigationCompose = "2.8.5"
