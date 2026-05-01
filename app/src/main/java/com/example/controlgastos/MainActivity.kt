@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import com.example.controlgastos.data.local.DatabaseProvider
 import com.example.controlgastos.data.repository.ExpenseRepository
 import com.example.controlgastos.ui.navigation.AppNavigation
+import com.example.controlgastos.ui.theme.ControlGastosTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -16,7 +17,10 @@ class MainActivity : ComponentActivity() {
         val repository = ExpenseRepository(database.expenseDao())
 
         setContent {
-            AppNavigation(repository = repository)
+            ControlGastosTheme() {
+                AppNavigation(repository = repository)
+            }
+
         }
     }
 }
