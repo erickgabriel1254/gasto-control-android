@@ -15,10 +15,11 @@ import androidx.compose.ui.res.stringResource
 import com.example.controlgastos.R
 import com.example.controlgastos.ui.utils.formatCurrency
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.Color
-
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 /**
  * Pantalla principal de la aplicación.
  * Muestra el total de gastos y la lista de registros.
@@ -51,6 +52,17 @@ fun HomeScreen(
                 .padding(padding)
                 .padding(16.dp)
         ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.logo_app),
+                contentDescription = "Logo",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp),
+                contentScale = ContentScale.Fit
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             SummaryCard(
                 title = "Total Gastado",
