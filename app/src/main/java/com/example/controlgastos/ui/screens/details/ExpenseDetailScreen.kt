@@ -26,6 +26,10 @@ import androidx.compose.ui.unit.dp
 import com.example.controlgastos.ui.components.PrimaryButton
 import androidx.compose.ui.res.stringResource
 import com.example.controlgastos.R
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.DropdownMenuItem
+import com.example.controlgastos.ui.utils.formatDate
 
 /**
  * Pantalla de detalle del gasto.
@@ -43,6 +47,17 @@ fun ExpenseDetailScreen(
     var amount by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    var expanded by remember { mutableStateOf(false) }
+
+    val categories = listOf(
+        "Comida",
+        "Transporte",
+        "Salud",
+        "Educación",
+        "Entretenimiento",
+        "Servicios",
+        "Otros"
+    )
 
     LaunchedEffect(expense) {
         expense?.let {
@@ -96,12 +111,38 @@ fun ExpenseDetailScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                OutlinedTextField(
-                    value = category,
-                    onValueChange = { category = it },
-                    label = { Text(stringResource(R.string.category_label)) },
-                    modifier = Modifier.fillMaxWidth()
-                )
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = { expanded = !expanded }
+                ) {
+                    OutlinedTextField(
+                        value = category,
+                        onValueChange = {},
+                        readOnly = true,
+                        label = { Text(stringResource(R.string.category_label)) },
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                        },
+                        modifier = Modifier
+                            .menuAnchor()
+                            .fillMaxWidth()
+                    )
+
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        categories.forEach { selectedCategory ->
+                            DropdownMenuItem(
+                                text = { Text(text = selectedCategory) },
+                                onClick = {
+                                    category = selectedCategory
+                                    expanded = false
+                                }
+                            )
+                        }
+                    }
+                }
 
                 Spacer(modifier = Modifier.height(12.dp))
 
