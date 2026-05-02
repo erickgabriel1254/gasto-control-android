@@ -6,25 +6,28 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.controlgastos.ui.components.PrimaryButton
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.example.controlgastos.R
+import com.example.controlgastos.ui.components.PrimaryButton
 
 /**
  * Pantalla para registrar un nuevo gasto.
- * Contiene un formulario básico y delega el guardado al ViewModel.
+ * Contiene un formulario básico, selector de categoría y delega el guardado al ViewModel.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,16 +39,29 @@ fun AddExpenseScreen(
     var amount by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    var expanded by remember { mutableStateOf(false) }
+
+    val categories = listOf(
+        "Comida",
+        "Transporte",
+        "Salud",
+        "Educación",
+        "Entretenimiento",
+        "Servicios",
+        "Otros"
+    )
+
+    val amountValue = amount.toDoubleOrNull()
 
     val isFormValid = title.isNotBlank() &&
-            amount.toDoubleOrNull() != null &&
-            amount.toDoubleOrNull()!! > 0.0 &&
+            amountValue != null &&
+            amountValue > 0.0 &&
             category.isNotBlank()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.new_expense)) }
+                title = { Text(text = stringResource(R.string.new_expense)) }
             )
         }
     ) { padding ->
@@ -75,12 +91,38 @@ fun AddExpenseScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            OutlinedTextField(
-                value = category,
-                onValueChange = { category = it },
-                label = { Text(stringResource(R.string.category_label)) },
-                modifier = Modifier.fillMaxWidth()
-            )
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = { expanded = !expanded }
+            ) {
+                OutlinedTextField(
+                    value = category,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text(stringResource(R.string.category_label)) },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                    },
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth()
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    categories.forEach { selectedCategory ->
+                        DropdownMenuItem(
+                            text = { Text(text = selectedCategory) },
+                            onClick = {
+                                category = selectedCategory
+                                expanded = false
+                            }
+                        )
+                    }
+                }
+            }
 
             Spacer(modifier = Modifier.height(12.dp))
 

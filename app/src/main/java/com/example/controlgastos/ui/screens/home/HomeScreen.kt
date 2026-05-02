@@ -15,6 +15,9 @@ import androidx.compose.ui.res.stringResource
 import com.example.controlgastos.R
 import com.example.controlgastos.ui.utils.formatCurrency
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.Color
 
 /**
  * Pantalla principal de la aplicación.
@@ -32,8 +35,13 @@ fun HomeScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddClick) {
-                Text(stringResource(R.string.new_expense))
+            FloatingActionButton(
+                onClick = onAddClick,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            )  {
+                Text(stringResource(R.string.new_expense),
+                    color = Color.White)
             }
         }
     ) { padding ->
