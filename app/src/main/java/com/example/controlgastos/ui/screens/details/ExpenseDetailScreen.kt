@@ -102,6 +102,12 @@ fun ExpenseDetailScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
+                Text(
+                    text = "Fecha: ${formatDate(currentExpense.createdAt)}"
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
                 OutlinedTextField(
                     value = amount,
                     onValueChange = { amount = it },
